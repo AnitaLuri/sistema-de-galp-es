@@ -1,0 +1,15 @@
+<h1>Galpões & Estoque</h1>
+<br />
+<h2> Galpões </h2>
+
+<% if @warehouses.empty? %>
+  <p> Nenhum galpão cadastrado. </p>
+<% end %>
+
+<% @warehouses.each do |w| %>
+  <%= w.name %>
+  Código: <%= w.code %>
+  Cidade: <%= w.city %>
+  <%= w.area %> m²
+<% end %>
+
