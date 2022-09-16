@@ -124,6 +124,24 @@ RSpec.describe Warehouse, type: :model do
 
       expect(warehouse_second.valid?).to eq false 
     end
+    it 'false when state is longer than two caracteres' do
+      #Arrange 
+      warehouse = Warehouse.create(name: 'Rio de Janeiro', code: 'RIO', address: 'Endereço',
+                                      city: 'Rio de Janeiro', state: 'RJA', cep: '25000-000', 
+                                      area: '20000', description: 'Alguma coisa sobre galpão')
+      
+
+      expect(warehouse.valid?).to eq false
+    end
+    it 'false when cep is invalid' do
+      #Arrange 
+      warehouse = Warehouse.create(name: 'Rio de Janeiro', code: 'RIO', address: 'Endereço',
+                                      city: 'Rio de Janeiro', state: 'RJA', cep: '99-000', 
+                                      area: '20000', description: 'Alguma coisa sobre galpão')
+      
+
+      expect(warehouse.valid?).to eq false
+    end
   end
 end
  

@@ -14,7 +14,15 @@
   </div>
 </dl>
 
-<br />
-<%= link_to('Editar', edit_warehouse_path(@warehouse.id))%>
-<br />
-<%= link_to('Voltar', root_path)%>
+<div>
+  <br />
+  <%= button_to('Remover', warehouse_path(@warehouse.id), method: :delete)%>
+  <br />
+  <%= link_to('Editar', edit_warehouse_path(@warehouse.id))%>
+  <br />
+</div>
+
+<div>
+  <br />
+  <%= link_to('Voltar', root_path)%>
+</div>
