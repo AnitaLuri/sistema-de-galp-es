@@ -138,9 +138,12 @@ RSpec.describe Warehouse, type: :model do
       warehouse = Warehouse.create(name: 'Rio de Janeiro', code: 'RIO', address: 'Endereço',
                                       city: 'Rio de Janeiro', state: 'RJA', cep: '99-000', 
                                       area: '20000', description: 'Alguma coisa sobre galpão')
-      
+      warehouse_second = Warehouse.create(name: 'Niteroi', code: 'RIN', address: 'Avenida',
+                                          city: 'Niteroi', state: 'RJ', cep: 'nnnnn-000', 
+                                          area: '21000', description: 'Alguma coisa sobre galpão de Niteroi')
 
       expect(warehouse.valid?).to eq false
+      expect(warehouse_second.valid?).to eq false
     end
   end
 end
