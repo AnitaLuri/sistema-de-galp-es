@@ -9,5 +9,6 @@ pt-BR:
         code: 'Código'
         address: 'Endereço'
         city: 'Cidade'
+        state: 'Estado'
         cep: 'CEP'
         area: 'Área'

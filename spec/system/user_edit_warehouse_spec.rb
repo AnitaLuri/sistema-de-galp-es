@@ -3,7 +3,7 @@ require "rails_helper"
 describe 'Usuário edita um galpão' do
   it 'a partir da página de detalhes' do
     #Arrange
-    warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000, 
+    warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', state: 'SP', area: 100_000, 
                                   address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
                                   description: 'Galpão destinado para cargas internacionais')
     #Act
@@ -23,7 +23,7 @@ describe 'Usuário edita um galpão' do
   end
   it 'com sucesso' do
     #Arrange
-    warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000, 
+    warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', state: 'SP', area: 100_000, 
                                   address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
                                   description: 'Galpão destinado para cargas internacionais')
     #Act
@@ -44,7 +44,7 @@ describe 'Usuário edita um galpão' do
   end
   it 'e mantém os campos obrgatórios' do
     #Arrange
-    warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000, 
+    warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', state: 'SP', area: 100_000, 
                                   address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
                                   description: 'Galpão destinado para cargas internacionais')
     #Act
