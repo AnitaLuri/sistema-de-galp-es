@@ -9,39 +9,7 @@
   </ul>
 <% end %>
 
-<%= form_with(model: @supplier) do |f| %>
-  <div>
-    <%= f.label :corporate_name %>
-    <%= f.text_field :corporate_name %><br />
-  </div>
-  <div>
-    <%= f.label :brand_name %>
-    <%= f.text_field :brand_name %><br />
-  </div>
-  <div>
-    <%= f.label :registration_numbers %>
-    <%= f.text_field :registration_numbers %><br />
-  </div>
-  <div>
-    <%= f.label :full_address %>
-    <%= f.text_field :full_address %><br />
-  </div>
-  <div>
-    <%= f.label :city %>
-    <%= f.text_field :city %><br />
-  </div>
-  <div>
-    <%= f.label :state %>
-    <%= f.text_field :state %><br />
-  </div>
-   <div>
-    <%= f.label :email %>
-    <%= f.text_field :email %><br />
-  </div>
- 
-  <br />
-  <%= f.submit %>
-<% end %>
+<%= render 'form' %>
 
 <br />
 <%= link_to('Voltar para home', root_path)%>

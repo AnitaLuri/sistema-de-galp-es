@@ -88,5 +88,35 @@ RSpec.describe Supplier, type: :model do
         expect(result).to eq false
       end
     end
+    it 'false when registration numbers is invalid' do
+      #Arrange
+      supplier = Supplier.new(corporate_name: 'Apple Computer Brasil', brand_name: 'Apple', registration_numbers: '00623.904/0001-00', 
+                              full_address: 'Rua Leopoldo Couto, 700', city: 'São Paulo', state: 'SP',
+                              email: 'apple@example.com') 
+      
+      supplier_second = Supplier.new(corporate_name: 'Apple Computer Brasil', brand_name: 'Apple', registration_numbers: '623.904/0001-00', 
+                              full_address: 'Rua Leopoldo Couto, 700', city: 'São Paulo', state: 'SP',
+                              email: 'apple@example.com')
+      #Act
+
+      #Assert
+      expect(supplier.valid?).to eq false
+      expect(supplier_second.valid?).to eq false
+    end
+    it 'false when email is invalid' do
+      #Arrange
+      supplier = Supplier.new(corporate_name: 'Apple Computer Brasil', brand_name: 'Apple', registration_numbers: '00.623.904/0001-00', 
+                              full_address: 'Rua Leopoldo Couto, 700', city: 'São Paulo', state: 'SP',
+                              email: 'appleexample.com') 
+      
+      supplier_second = Supplier.new(corporate_name: 'Apple Computer Brasil', brand_name: 'Apple', registration_numbers: '00.623.904/0001-00', 
+                              full_address: 'Rua Leopoldo Couto, 700', city: 'São Paulo', state: 'SP',
+                              email: 'apple@example,com')
+      #Act
+
+      #Assert
+      expect(supplier.valid?).to eq false
+      expect(supplier_second.valid?).to eq false
+    end
   end
 end
