@@ -1,0 +1,21 @@
+<h2> Modelos de Produtos </h2>
+
+<%if @product_models.any? %>
+  <% @product_models.each do |p| %>
+    <div>
+      <h3><%= p.name %></h3>
+      <dl>
+        <dt> SKU: </dt>
+        <dd> <%= p.sku %> </dd>
+        <dt> Fornecedor: </dt> 
+        <dd> <%= p.supplier.brand_name %> </dd> 
+      </dl>
+    </div>
+  <% end %>
+<% else %>
+  <p>Nenhum modelo de produto cadastrado</p>
+<% end %>
+<div>
+  <br />
+  <%= link_to('Voltar para home', root_path)%>
+</div>
