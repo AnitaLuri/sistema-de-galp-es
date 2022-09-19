@@ -1,5 +1,9 @@
 <h2> Lista de Fornecedores </h2>
 
+<div>
+  <%= link_to('Cadastrar Fornecedor', new_supplier_path) %>
+</div>
+<br />
 <% if @suppliers.any? %>
   <table>
     <thead>
@@ -23,5 +27,5 @@
 
 <div>
   <br />
-  <%= link_to('Voltar', root_path)%>
+  <%= link_to('Voltar para home', root_path)%>
 </div>
