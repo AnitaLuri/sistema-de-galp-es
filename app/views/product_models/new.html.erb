@@ -1,0 +1,40 @@
+<h2> Novo Modelo de Produto </h2>
+
+<%= form_with(model: @product_model) do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %><br />
+  </div>
+  <br />
+  <div>
+    <%= f.label :sku %>
+    <%= f.text_field :sku %><br />
+  </div>
+  <br />
+  <div>
+    <%= f.label :weight %>
+    <%= f.number_field :weight %><br />
+  </div>
+  <br />
+  <div>
+    <%= f.label :width %>
+    <%= f.number_field :width %><br />
+  </div>
+  <br />
+  <div>
+    <%= f.label :height %>
+    <%= f.number_field :height %><br />
+  </div>
+  <br />
+  <div>
+    <%= f.label :depth %>
+    <%= f.number_field :depth %>
+  </div>
+  <br />
+  <div>
+    <%= f.label :supplier_id %>
+    <%= f.collection_select :supplier_id, @suppliers, :id, :brand_name %>
+  </div>
+  <br />
+  <%= f.submit %>
+<% end %>

@@ -1,9 +1,14 @@
 <h2> Modelos de Produtos </h2>
 
+<div>
+  <br />
+  <%= link_to('Cadastrar Novo', new_product_model_path)%>
+</div>
+
 <%if @product_models.any? %>
   <% @product_models.each do |p| %>
     <div>
-      <h3><%= p.name %></h3>
+      <h3><%= link_to p.name, p %></h3>
       <dl>
         <dt> SKU: </dt>
         <dd> <%= p.sku %> </dd>
