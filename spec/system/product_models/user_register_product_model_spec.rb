@@ -18,7 +18,7 @@ describe 'Usuário cadastra um modelo de produtos' do
     fill_in 'Largura', with: '70'
     fill_in 'Altura', with: '45'
     fill_in 'Profundidade', with: '10'
-    fill_in 'SKU', with: 'SOU71-SAMSU-NOIZ77'
+    fill_in 'SKU', with: 'SOU71-SAMS-NOIZ-ELET'
     select 'Samsung', from: 'Fornecedor'
     click_on 'Criar Modelo de Produto'
     
@@ -26,7 +26,7 @@ describe 'Usuário cadastra um modelo de produtos' do
     expect(page).to have_content 'Modelo de Produto cadastrado com sucesso'
     expect(page).to have_content 'TV 32'
     expect(page).to have_content 'Fornecedor: Samsung'
-    expect(page).to have_content 'SKU: SOU71-SAMSU-NOIZ77'
+    expect(page).to have_content 'SKU: SOU71-SAMS-NOIZ-ELET'
     expect(page).to have_content 'Dimensão: 70cm x 45cm x 10cm'
     expect(page).to have_content 'Peso: 8000g'
   end
@@ -63,13 +63,13 @@ describe 'Usuário cadastra um modelo de produtos' do
                                 full_address: 'Avenida Oitis, 1400', city: 'Manaus', state: 'AM',
                                 email: 'samsung@example.com') 
     pm = ProductModel.create!(name: 'TV 32',weight: 8000, width: 70, height: 45,
-                                depth: 10, sku: 'TV32-SAMSU-XPTO', supplier: supplier)
+                                depth: 10, sku: 'TV32-SAMSU-XPTO-ELET', supplier: supplier)
     #Act
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'
     fill_in 'Nome', with: 'TV 40'
-    fill_in 'SKU', with: 'TV32-SAMSU-XPTO'
+    fill_in 'SKU', with: 'TV32-SAMSU-XPTO-ELET'
     fill_in 'Peso', with: '8000'
     fill_in 'Largura', with: '70'
     fill_in 'Altura', with: '45'
@@ -78,6 +78,29 @@ describe 'Usuário cadastra um modelo de produtos' do
     #Assert
     expect(page).to have_content('Modelo de Produto não cadastrado.')
     expect(page).to have_content('SKU já está em uso')
+  end
+  it 'com peso e dimensões com valores invalidos' do
+    #Arrange
+    supplier = Supplier.create!(corporate_name: 'Samsung Eletronica', brand_name: 'Samsung', registration_numbers: '00.280.273/0001-00', 
+                                full_address: 'Avenida Oitis, 1400', city: 'Manaus', state: 'AM',
+                                email: 'samsung@example.com') 
+    #Act
+    visit root_path
+    click_on 'Modelos de Produtos'
+    click_on 'Cadastrar Novo'
+    fill_in 'Nome', with: 'TV 40'
+    fill_in 'SKU', with: 'TV32-SAMSU-XPTO-ELET'
+    fill_in 'Peso', with: '0'
+    fill_in 'Largura', with: '-70'
+    fill_in 'Altura', with: '0'
+    fill_in 'Profundidade', with: '-10'
+    click_on 'Criar Modelo de Produto'
+    #Assert
+    expect(page).to have_content('Modelo de Produto não cadastrado.')
+    expect(page).to have_content('Peso deve ser maior que 0')
+    expect(page).to have_content('Largura deve ser maior que 0')
+    expect(page).to have_content('Altura deve ser maior que 0')
+    expect(page).to have_content('Profundidade deve ser maior que 0')
   end
 end
 

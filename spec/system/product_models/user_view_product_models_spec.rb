@@ -17,9 +17,9 @@ describe 'Usuário vê modelos de produtos' do
                               full_address: 'Avenida Oitis, 1400', city: 'Manaus', state: 'AM',
                               email: 'samsung@example.com') 
     ProductModel.create!(name: 'TV 32',weight: 8000, width: 70, height: 45,
-                          depth: 10,sku: 'TV32-SAMSU-XPTO',supplier: supplier)
+                          depth: 10,sku: 'TV32-SAMSU-XPTO-ELET',supplier: supplier)
     ProductModel.create!(name: 'SoundBar',weight: 3000, width: 80, height: 15,
-                          depth: 20,sku: 'SOU71-SAMSU-NOIZ77',supplier: supplier)
+                          depth: 20,sku: 'SOU71-SAMS-NOIZ-ELET',supplier: supplier)
     #Act
     visit root_path
     within('nav') do
@@ -27,10 +27,10 @@ describe 'Usuário vê modelos de produtos' do
     end
     #Assert
     expect(page).to have_content('TV 32')
-    expect(page).to have_content('TV32-SAMSU-XPTO')
+    expect(page).to have_content('TV32-SAMSU-XPTO-ELET')
     expect(page).to have_content('Samsung')
     expect(page).to have_content('SoundBar')
-    expect(page).to have_content('SOU71-SAMSU-NOIZ77')
+    expect(page).to have_content('SOU71-SAMS-NOIZ-ELET')
     expect(page).to have_content('Samsung')
   end
   it 'e não existe produtos cadastrados' do
