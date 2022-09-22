@@ -6,7 +6,7 @@
   </dt>
   <div>
     <dd><strong>SKU: </strong><%= @product_model.sku %></dd>
-    <dd><strong>Fornecedor: </strong><%= @product_model.supplier.brand_name %></dd>
+    <dd><strong>Fornecedor: </strong><td><%= link_to @product_model.supplier.brand_name, @product_model.supplier %></td>
     <dd><strong>Dimensão: </strong><%= @product_model.width %>cm x <%= @product_model.height %>cm x <%= @product_model.depth %>cm</dd>
     <dd><strong>Peso: </strong><%= @product_model.weight %>g</dd>
   </div>
