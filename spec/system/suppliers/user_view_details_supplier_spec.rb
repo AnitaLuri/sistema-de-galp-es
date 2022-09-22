@@ -28,7 +28,7 @@ describe 'Usuário vê detalhes de um fornecedor' do
     visit root_path
     click_on 'Fornecedores'
     click_on 'Apple'
-    click_on 'Voltar' 
+    click_on 'Home' 
 
     # Assert
     expect(current_path).to eq(root_path)

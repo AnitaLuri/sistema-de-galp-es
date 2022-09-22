@@ -46,7 +46,7 @@ describe 'Usuário vê fornecedores'  do
     # Act
     visit root_path
     click_on 'Fornecedores' 
-    click_on 'Voltar' 
+    click_on 'Home' 
 
     # Assert
     expect(current_path).to eq(root_path)
