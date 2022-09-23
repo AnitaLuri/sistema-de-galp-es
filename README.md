@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+O projeto representa uma aplicação dentro do contexto de um e-commerce. 
+Um sistema para controle do estoque de produtos.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Esta aplicação é responsável pela gestão de galpões e do estoque de cada galpão, manter os dados de estoque atualizados, registrar a saída de produtos. 
+Os produtos são comprados de fornecedores e a entrada dos produtos está sempre vinculada a um pedido. Todas estas informações também serão cadastradas nesse sistema.

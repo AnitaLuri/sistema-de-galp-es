@@ -16,4 +16,26 @@
   <%= link_to('Editar', edit_supplier_path(@supplier.id))%>
   <br />
 </div>
+<br />
+<br />
 
+<% if @supplier.product_models.size > 0 %>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>  
+        <th>SKU</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @supplier.product_models.each do |product| %>
+        <tr>
+          <td><%= link_to product.name, product %> | </td> 
+          <td><%= product.sku %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p> Nenhum modelo de produto cadastrado para esse fornecedor. </p>
+<% end  %>
