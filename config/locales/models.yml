@@ -4,7 +4,6 @@ pt-BR:
       warehouse: 'Galpão'
       supplier: 'Fornecedor'
       product_model: 'Modelo de Produto'
-      user:  'Usuário'
     attributes:
       warehouse:
         name: 'Nome'
@@ -31,6 +30,4 @@ pt-BR:
         height: 'Altura'
         depth: 'Profundidade'
         supplier_id: 'Fornecedor'
-      user:
-        email: 'E-mail'
-        password: 'Senha'
+      
