@@ -3,6 +3,7 @@ require "rails_helper"
 describe 'Usuário cadastra um modelo de produtos' do
   it 'com sucesso' do
     #Arrange
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
     supplier = Supplier.create!(corporate_name: 'Samsung Eletronica', brand_name: 'Samsung', registration_numbers: '00.280.273/0001-00', 
                                 full_address: 'Avenida Oitis, 1400', city: 'Manaus', state: 'AM',
                                 email: 'samsung@example.com') 
@@ -10,6 +11,7 @@ describe 'Usuário cadastra um modelo de produtos' do
                                 full_address: 'Avenida Oitis, 14', city: 'Manaus', state: 'AM',
                                 email: 'lg@example.com') 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'
@@ -32,11 +34,13 @@ describe 'Usuário cadastra um modelo de produtos' do
   end
   it 'deve preencher todos os campos' do
     #Arrange
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
     supplier = Supplier.create!(corporate_name: 'Samsung Eletronica', brand_name: 'Samsung', registration_numbers: '00.280.273/0001-00', 
                                 full_address: 'Avenida Oitis, 1400', city: 'Manaus', state: 'AM',
                                 email: 'samsung@example.com') 
 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'
@@ -59,12 +63,14 @@ describe 'Usuário cadastra um modelo de produtos' do
   end
   it 'com SKU unico' do
     #Arrange
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
     supplier = Supplier.create!(corporate_name: 'Samsung Eletronica', brand_name: 'Samsung', registration_numbers: '00.280.273/0001-00', 
                                 full_address: 'Avenida Oitis, 1400', city: 'Manaus', state: 'AM',
                                 email: 'samsung@example.com') 
     pm = ProductModel.create!(name: 'TV 32',weight: 8000, width: 70, height: 45,
                                 depth: 10, sku: 'TV32-SAMSU-XPTO-ELET', supplier: supplier)
     #Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'
@@ -81,10 +87,12 @@ describe 'Usuário cadastra um modelo de produtos' do
   end
   it 'com peso e dimensões com valores invalidos' do
     #Arrange
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
     supplier = Supplier.create!(corporate_name: 'Samsung Eletronica', brand_name: 'Samsung', registration_numbers: '00.280.273/0001-00', 
                                 full_address: 'Avenida Oitis, 1400', city: 'Manaus', state: 'AM',
                                 email: 'samsung@example.com') 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'

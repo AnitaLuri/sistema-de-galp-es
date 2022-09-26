@@ -3,6 +3,7 @@ require "rails_helper"
 describe 'Usuário remove um galpão' do
   it 'com sucesso' do
     #Arrange
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
     warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', state: 'SP', area: 100000, 
                                   address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
                                   description: 'Galpão destinado para cargas internacionais')
@@ -10,6 +11,7 @@ describe 'Usuário remove um galpão' do
                                   city: 'Rio de Janeiro', state: 'RJ', cep: '25000-000', 
                                   area: 20000, description: 'Alguma coisa sobre galpão')
     #Act
+    login_as(user)
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Remover'

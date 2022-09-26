@@ -2,12 +2,14 @@ require 'rails_helper'
 
 describe 'Usuário vê detalhes de um modelo de produto' do
   it 'e ve todas as informações' do
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
     supplier = Supplier.create!(corporate_name: 'Samsung Eletronica', brand_name: 'Samsung', registration_numbers: '00.280.273/0001-00', 
                                 full_address: 'Avenida Oitis, 1400', city: 'Manaus', state: 'AM',
                                 email: 'samsung@example.com') 
     ProductModel.create!(name: 'TV 32',weight: 8000, width: 70, height: 45,
                         depth: 10,sku: 'TV32-SAMSU-XPTO-ELET',supplier: supplier)
     #Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'TV 32'
@@ -19,12 +21,14 @@ describe 'Usuário vê detalhes de um modelo de produto' do
     expect(page).to have_content ('Peso: 8000g')
   end
   it 'e acessa os detalhes do fornecedor' do
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
     supplier = Supplier.create!(corporate_name: 'Samsung Eletronica', brand_name: 'Samsung', registration_numbers: '00.280.273/0001-00', 
                                 full_address: 'Avenida Oitis, 1400', city: 'Manaus', state: 'AM',
                                 email: 'samsung@exemplo.com') 
     ProductModel.create!(name: 'TV 32',weight: 8000, width: 70, height: 45,
                           depth: 10,sku: 'TV32-SAMSU-XPTO-ELET',supplier: supplier)
     #Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'TV 32'

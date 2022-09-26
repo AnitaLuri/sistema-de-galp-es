@@ -3,15 +3,18 @@ require "rails_helper"
 describe 'Usuário edita um fornecedor cadastrado' do
   it 'a partir da página de detalhes' do
     #Arrange
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
     Supplier.create!(corporate_name: 'Samsung Eletronica', brand_name: 'Samsung', registration_numbers: '00.280.273/0001-00', 
                       full_address: 'Avenida Oitis, 1400', city: 'Manaus', state: 'AM',
                       email: 'samsung@example.com') 
 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Samsung'
     click_on 'Editar'
+
     #Assert
     expect(page).to have_content('Editar Fornecedor')
     expect(page).to have_field('Nome corporativo', with: 'Samsung Eletronica')
@@ -24,11 +27,13 @@ describe 'Usuário edita um fornecedor cadastrado' do
   end
   it 'com sucesso' do
     #Arrange
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
     Supplier.create!(corporate_name: 'Samsung Eletronica', brand_name: 'Samsung', registration_numbers: '00.280.273/0001-00', 
                       full_address: 'Avenida Oitis, 1400', city: 'Manaus', state: 'AM',
                       email: 'samsung@example.com') 
 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Samsung'
@@ -49,10 +54,12 @@ describe 'Usuário edita um fornecedor cadastrado' do
   end
   it 'e mantém os campos obrigatórios' do
     #Arrange
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
     Supplier.create!(corporate_name: 'Samsung Eletronica', brand_name: 'Samsung', registration_numbers: '00.280.273/0001-00', 
                       full_address: 'Avenida Oitis, 1400', city: 'Manaus', state: 'AM',
                       email: 'samsung@example.com') 
     #Act
+    login_as (user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Samsung'
