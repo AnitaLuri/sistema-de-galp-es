@@ -1,5 +1,4 @@
 class SuppliersController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :new, :create, :update, :edit]
   before_action :set_warehouse, only: [:show, :edit, :update]
 
   def index

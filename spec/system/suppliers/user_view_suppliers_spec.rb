@@ -3,7 +3,9 @@ require "rails_helper"
 describe 'Usuário vê fornecedores'  do
   it 'a partir do menu' do
     #Arrange
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
     #Act
+    login_as(user)
     visit root_path
     within ('nav') do
       click_on 'Fornecedores'
@@ -15,6 +17,7 @@ describe 'Usuário vê fornecedores'  do
   end
   it 'e vê os fornecedores cadastrados' do
     #Arrange - cadastrar 2 galpoes: Rio e Maceio
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
     Supplier.create!(corporate_name: 'Apple Computer Brasil', brand_name: 'Apple', registration_numbers: '00.623.904/0001-00', 
                     full_address: 'Rua Leopoldo Couto, 700', city: 'São Paulo', state: 'SP',
                     email: 'apple@example.com') 
@@ -23,6 +26,7 @@ describe 'Usuário vê fornecedores'  do
                     email: 'samsung@example.com') 
 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     
@@ -35,7 +39,9 @@ describe 'Usuário vê fornecedores'  do
   end
   it 'e não existe forncedor cadastrado' do
     #Arrange
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
     #Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     #Assert
@@ -43,7 +49,9 @@ describe 'Usuário vê fornecedores'  do
   end
   it 'e volta para a página inicial' do
     # Arrange
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores' 
     click_on 'Home' 
