@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário se autentica' do
   it 'com sucesso' do
     #Arrange
-    User.create!(email: 'exemplo@example.com', password: 'password')
+    User.create!(name: 'João', email: 'exemplo@example.com', password: 'password')
     #Act
     visit root_path
     within ('nav') do
@@ -18,7 +18,7 @@ describe 'Usuário se autentica' do
     expect(page).not_to have_link ('Entrar')
     expect(page).to have_button ('Sair')
     within ('nav') do
-      expect(page).to have_content 'exemplo@example.com'
+      expect(page).to have_content 'João - exemplo@example.com'
     end
     expect(page).to have_content 'Login efetuado com sucesso.'
   end

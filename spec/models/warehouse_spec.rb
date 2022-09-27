@@ -146,5 +146,17 @@ RSpec.describe Warehouse, type: :model do
       expect(warehouse_second.valid?).to eq false
     end
   end
+
+  describe '#full_description' do
+    it 'exibe o nome e o código' do
+      w = Warehouse.create(name: 'Rio de Janeiro', code: 'RIO', address: 'Endereço',
+                          city: 'Rio de Janeiro', state: 'RJ', cep: '25000-000', 
+                          area: '20000', description: 'Alguma coisa sobre galpão')
+      #Act
+      result = w.full_description()
+      #Assert
+      expect(result).to eq ('RIO - Rio de Janeiro')
+    end
+  end
 end
  

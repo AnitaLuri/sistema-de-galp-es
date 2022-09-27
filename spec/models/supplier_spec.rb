@@ -119,4 +119,16 @@ RSpec.describe Supplier, type: :model do
       expect(supplier_second.valid?).to eq false
     end
   end
+
+  describe '#full_description' do
+    it 'exibe o nome corporativo e o número de registro' do
+      s = Supplier.new(corporate_name: 'Apple Computer Brasil', brand_name: 'Apple', registration_numbers: '00.623.904/0001-00', 
+                        full_address: 'Rua Leopoldo Couto, 700', city: 'São Paulo', state: 'SP',
+                        email: 'apple@example.com')
+      #Act
+      result = s.full_description()
+      #Assert
+      expect(result).to eq ('Apple Computer Brasil - 00.623.904/0001-00')
+    end
+  end
 end

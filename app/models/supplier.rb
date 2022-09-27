@@ -5,4 +5,8 @@ class Supplier < ApplicationRecord
   validates :registration_numbers, format: { with: /\A[0-9]{2}\.[0-9]{3}\.[0-9]{3}\/[0-9]{4}\-[0-9]{2}\z/i }
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
   has_many :product_models
+
+  def full_description
+    "#{corporate_name} - #{registration_numbers}"
+  end
 end
