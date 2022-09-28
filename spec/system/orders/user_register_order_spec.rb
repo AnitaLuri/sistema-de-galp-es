@@ -23,6 +23,7 @@ describe 'Usuário cadastra um pedido' do
     Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', state: 'SP', area: 100_000, 
                                 address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
                                 description: 'Galpão destinado para cargas internacionais')
+    allow(SecureRandom).to receive(:alphanumeric).and_return('ABC1234567')                            
     #Act
     login_as(user)
     visit root_path
@@ -33,6 +34,7 @@ describe 'Usuário cadastra um pedido' do
     click_on 'Criar Pedido'
     #Assert
     expect(page).to have_content 'Pedido registrado com sucesso'
+    expect(page).to have_content 'Pedido: ABC1234567'
     expect(page).to have_content 'Galpão Destino: SDU - Rio'
     expect(page).to have_content 'Fornecedor: Apple Computer Brasil'
     expect(page).to have_content 'Usuário responsável: Maria - test@example.com' 
@@ -40,4 +42,20 @@ describe 'Usuário cadastra um pedido' do
     expect(page).not_to have_content 'Aeroporto SP'
     expect(page).not_to have_content 'Samsung Computer Brasil'
   end 
+  it 'com dados incompletos' do
+    #Arrange
+    user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
+    #Act
+    login_as(user)
+    visit root_path
+    click_on 'Registrar Pedido'
+    fill_in 'Data Prevista de Entrega', with: ' '
+    click_on 'Criar Pedido'
+
+    #Assert
+    expect(page).to have_content('Não é possível registrar o pedido.')
+    expect(page).to have_content('Galpão Destino é obrigatório(a)')
+    expect(page).to have_content('Fornecedor é obrigatório(a)')
+    expect(page).to have_content('Data Prevista de Entrega não pode ficar em branco')
+  end  
 end

@@ -7,13 +7,13 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.user = current_user
-    if @order.save!
+    if @order.save()
       flash[:notice] = "Pedido registrado com sucesso!"
       redirect_to @order
     else
       @suppliers = Supplier.all
       @warehouses = Warehouse.all 
-      flash.now[:notice] = "Pedido não registrado."
+      flash.now[:notice] = "Não é possível registrar o pedido."
       render 'new'
     end
   end
