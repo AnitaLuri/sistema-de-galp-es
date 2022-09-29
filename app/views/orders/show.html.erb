@@ -4,19 +4,19 @@
   </dt>
   <div>
     <dd>
-      <strong>Galpão Destino: </strong>
+      <strong><%= Order.human_attribute_name(:warehouse_id) %>: </strong>
       <%= link_to @order.warehouse.full_description, @order.warehouse %>
     </dd>
     <dd>
-      <strong>Fornecedor: </strong>
+      <strong><%= Order.human_attribute_name(:supplier_id) %>: </strong>
       <%= link_to @order.supplier.full_description, @order.supplier %>
     </dd>
     <dd>
-      <strong>Usuário responsável:  </strong>
+      <strong><%= Order.human_attribute_name(:user) %> responsável:  </strong>
       <%= @order.user.description %>
     </dd>
     <dd>
-      <strong>Data Prevista de Entrega: </strong>
+      <strong><%= Order.human_attribute_name(:estimated_delivery_date) %>: </strong>
       <%= I18n.localize(@order.estimated_delivery_date) %>
     </dd>
   </div>

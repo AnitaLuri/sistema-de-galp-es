@@ -22,6 +22,11 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def search
+    @code = params["query"]
+    @orders = Order.where("code LIKE ?", "%#{@code}%")
+  end
+
   private
   def order_params
     order_params = params.require(:order).permit(:warehouse_id, :supplier_id, :user_id, :estimated_delivery_date)
