@@ -1,6 +1,7 @@
+<h2>Detalhes do Pedido</h2>
 <dl>
   <dt>
-    <h2><%= Order.model_name.human %>: <%= @order.code %></h2>
+    <h3><%= Order.model_name.human %>: <%= @order.code %></h3>
   </dt>
   <div>
     <dd>
@@ -21,3 +22,8 @@
     </dd>
   </div>
 </dl>
+
+<div>
+  <%= link_to('Editar', edit_order_path(@order.id))%>
+  <br />
+</div>

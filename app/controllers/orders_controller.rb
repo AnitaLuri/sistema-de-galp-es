@@ -24,11 +24,32 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    if @order.user != current_user
+      flash[:alert] = "Você não possui acesso a este pedido."
+      redirect_to root_path
+    end
   end
 
   def search
     @code = params["query"]
     @orders = Order.where("code LIKE ?", "%#{@code}%")
+  end
+
+  def edit
+    @suppliers = Supplier.all
+    @warehouses = Warehouse.all
+    @order = Order.find(params[:id])
+  end
+
+  def update
+    @order = Order.find(params[:id])
+    if @order.update(order_params)
+      flash[:notice] = "Pedido atualizado com sucesso."
+      redirect_to order_path(@order.id)
+    else
+      flash.now[:notice] = "Não foi possível atualizar o pedido."
+      render 'edit'
+    end
   end
 
   private
