@@ -51,7 +51,7 @@ describe 'Usuário busca por um pedido' do
     supplier = Supplier.create!(corporate_name: 'Apple Computer Brasil', brand_name: 'Apple', registration_numbers: '00.623.904/0001-00', 
                               full_address: 'Rua Leopoldo Couto, 700', city: 'São Paulo', state: 'SP',
                               email: 'apple@example.com') 
-    first_warehouse = Warehouse.create(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', state: 'SP', area: 100_000, 
+    first_warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', state: 'SP', area: 100_000, 
                               address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
                               description: 'Galpão destinado para cargas internacionais')
     second_warehouse = Warehouse.create!(name: 'Rio', code: 'SDU', city: 'Rio de Janeiro', state: 'RJ', area: 60_000, 

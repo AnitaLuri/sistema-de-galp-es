@@ -1,0 +1,10 @@
+<dl>
+  <dt><strong><%= Order.human_attribute_name(:code) %>: </strong></dt>
+  <dd><%= order.code %></dd>
+
+  <dt><strong><%= Order.human_attribute_name(:warehouse_id) %>: </strong></dt>
+  <dd><%= link_to order.warehouse.full_description, order.warehouse %></dd>
+
+  <dt><strong><%= Order.human_attribute_name(:supplier_id) %>: </strong></dt>
+  <dd><%= link_to order.supplier.full_description, order.supplier %></dd>
+</dl>
