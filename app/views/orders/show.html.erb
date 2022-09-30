@@ -20,8 +20,21 @@
       <strong><%= Order.human_attribute_name(:estimated_delivery_date) %>: </strong>
       <%= I18n.localize(@order.estimated_delivery_date) %>
     </dd>
+    <dd>
+      <p><strong><%= Order.human_attribute_name(:status) %>: </strong>
+      <%= I18n.translate(@order.status) %>
+    </dd>
   </div>
 </dl>
+
+<% if @order.pending? %>
+  <div>
+    <%= button_to 'Marcar como Entregue', delivered_order_path(@order.id)%>
+  </div>
+  <div>
+    <%= button_to 'Marcar como Cancelado', canceled_order_path(@order.id)%>
+  </div>
+<% end %>
 
 <div>
   <%= link_to('Editar', edit_order_path(@order.id))%>

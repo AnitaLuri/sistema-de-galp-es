@@ -7,4 +7,7 @@
 
   <dt><strong><%= Order.human_attribute_name(:supplier_id) %>: </strong></dt>
   <dd><%= link_to order.supplier.full_description, order.supplier %></dd>
+
+  <dt><strong><%= Order.human_attribute_name(:status) %>: </strong></dt>
+  <dd><%= I18n.translate(order.status) %></dd>
 </dl>

@@ -21,11 +21,11 @@ describe 'Usuário vê seus proprios pedidos' do
                               description: 'Galpão destinado para cargas internacionais')
     
     first_order =  Order.create!(user: first_user, warehouse: warehouse, supplier: supplier, 
-                              estimated_delivery_date: 1.day.from_now)               
+                              estimated_delivery_date: 1.day.from_now, status: 'pending')               
     second_order =  Order.create!(user: first_user, warehouse: warehouse, supplier: supplier, 
-                              estimated_delivery_date: 1.day.from_now)   
+                              estimated_delivery_date: 1.day.from_now, status: 'delivered')   
     third_order =  Order.create!(user: second_user, warehouse: warehouse, supplier: supplier, 
-                              estimated_delivery_date: 1.day.from_now)
+                              estimated_delivery_date: 1.day.from_now, status: 'canceled')
     #Act
     login_as(first_user)
     visit root_path
@@ -33,8 +33,11 @@ describe 'Usuário vê seus proprios pedidos' do
     #Assert
     expect(page).to have_content '2 pedidos encontrados'
     expect(page).to have_content first_order.code
+    expect(page).to have_content 'Pendente'
     expect(page).to have_content second_order.code
+    expect(page).to have_content 'Entregue'
     expect(page).not_to have_content third_order.code
+    expect(page).not_to have_content 'Cancelado'
   end
   it 'e visita um pedido' do
      #Arrange

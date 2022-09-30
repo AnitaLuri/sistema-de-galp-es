@@ -39,6 +39,7 @@ describe 'Usuário cadastra um pedido' do
     expect(page).to have_content 'Fornecedor: Apple Computer Brasil'
     expect(page).to have_content 'Usuário responsável: Maria - test@example.com' 
     expect(page).to have_content 'Data Prevista de Entrega: 20/12/2022'
+    expect(page).to have_content 'Situação do Pedido: Pendente'
     expect(page).not_to have_content 'Aeroporto SP'
     expect(page).not_to have_content 'Samsung Computer Brasil'
   end 
