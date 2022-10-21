@@ -64,7 +64,7 @@ RSpec.describe Order, type: :model do
                                     full_address: 'Rua Leopoldo Couto, 700', city: 'São Paulo', state: 'SP',
                                     email: 'apple@example.com')   
       order =  Order.new(user: user, warehouse: warehouse, supplier: supplier, 
-                                      estimated_delivery_date: '2022-10-01')                  
+                                      estimated_delivery_date: Time.zone.tomorrow)                  
       #Act
       order.save!
       result = order.code
@@ -82,9 +82,9 @@ RSpec.describe Order, type: :model do
                                     full_address: 'Rua Leopoldo Couto, 700', city: 'São Paulo', state: 'SP',
                                     email: 'apple@example.com')   
       first_order =  Order.create!(user: user, warehouse: warehouse, supplier: supplier, 
-                                      estimated_delivery_date: '2022-10-01')    
+                                      estimated_delivery_date: Time.zone.tomorrow)    
       second_order =  Order.new(user: user, warehouse: warehouse, supplier: supplier, 
-                                      estimated_delivery_date: '2022-11-29')                                                      
+                                      estimated_delivery_date: Time.zone.tomorrow)                                                      
       #Act
       second_order.save!
       #Assert

@@ -25,16 +25,33 @@
       <%= I18n.translate(@order.status) %>
     </dd>
   </div>
-</dl>
+</dl> 
 
-<% if @order.pending? %>
-  <div>
-    <%= button_to 'Marcar como Entregue', delivered_order_path(@order.id)%>
-  </div>
-  <div>
-    <%= button_to 'Marcar como Cancelado', canceled_order_path(@order.id)%>
-  </div>
-<% end %>
+<h2>Itens do Pedido</h2>
+<br />
+
+<div>
+  <%= link_to 'Adicionar Item', new_order_order_item_path(@order.id) %>
+</div>
+<br />
+
+<div>
+  <% @order.order_items.each do |item|%>
+    <%= item.quantity%> x <%= item.product_model.name %>
+  <% end %>
+</div>
+<br />
+
+<div>
+  <% if @order.pending? %>
+    <div>
+      <%= button_to 'Marcar como Entregue', delivered_order_path(order_id: @order.id)%>
+    </div>
+    <div>
+      <%= button_to 'Marcar como Cancelado', canceled_order_path(@order.id)%>
+    </div>
+  <% end %>
+</div>
 
 <div>
   <%= link_to('Editar', edit_order_path(@order.id))%>
