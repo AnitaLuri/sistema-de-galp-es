@@ -15,6 +15,16 @@
 </dl>
 
 <div>
+  <h2>Itens em Estoque </h2>
+  <div>
+    <% @stock.each_pair do |p, quantity|%>
+      <%= quantity %> x <%= p.sku%> - <%= p.name %>
+    <% end %>
+  </div>
+  <br />
+</div>
+
+<div>
   <br />
   <%= button_to('Remover', warehouse_path(@warehouse.id), method: :delete)%>
   <br />
