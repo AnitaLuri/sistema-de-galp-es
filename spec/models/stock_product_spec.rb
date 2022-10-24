@@ -62,4 +62,41 @@ RSpec.describe StockProduct, type: :model do
       expect(stock_product.serial_number).to eq(original_serial)
     end
   end
+  describe "#available?" do
+    it 'verdade se não tiver destino' do
+      user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
+      warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', state: 'SP', area: 100_000, 
+                                    address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
+                                    description: 'Galpão destinado para cargas internacionais')
+      supplier = Supplier.create!(corporate_name: 'Apple Computer Brasil', brand_name: 'Apple', registration_numbers: '00.623.904/0001-00', 
+                                    full_address: 'Rua Leopoldo Couto, 700', city: 'São Paulo', state: 'SP',
+                                    email: 'apple@example.com')   
+      product_a = ProductModel.create!(name: 'Produto A', weight: 15, width: 10, height: 20, depth: 30, 
+                                    supplier: supplier, sku: 'PRODUTO-A000-9999ABC')  
+      order_a =  Order.create!(user: user, warehouse: warehouse, supplier: supplier, 
+                                    estimated_delivery_date: Time.zone.tomorrow)                  
+      
+      stock_product = StockProduct.create!(order: order_a, warehouse: warehouse, product_model:product_a)
+
+      expect(stock_product.available?).to eq(true)
+    end
+    it 'falso se tiver destino' do
+      user = User.create!(name: 'Maria', email: 'test@example.com', password: 'password')
+      warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', state: 'SP', area: 100_000, 
+                                    address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
+                                    description: 'Galpão destinado para cargas internacionais')
+      supplier = Supplier.create!(corporate_name: 'Apple Computer Brasil', brand_name: 'Apple', registration_numbers: '00.623.904/0001-00', 
+                                    full_address: 'Rua Leopoldo Couto, 700', city: 'São Paulo', state: 'SP',
+                                    email: 'apple@example.com')   
+      product_a = ProductModel.create!(name: 'Produto A', weight: 15, width: 10, height: 20, depth: 30, 
+                                    supplier: supplier, sku: 'PRODUTO-A000-9999ABC')  
+      order_a =  Order.create!(user: user, warehouse: warehouse, supplier: supplier, 
+                                    estimated_delivery_date: Time.zone.tomorrow)                  
+      
+      stock_product = StockProduct.create!(order: order_a, warehouse: warehouse, product_model:product_a)
+      stock_product.create_stock_product_destination!(recipient: 'Ana', address: 'Rua das Rosas, 100')
+
+      expect(stock_product.available?).to eq(false)
+    end 
+  end
 end

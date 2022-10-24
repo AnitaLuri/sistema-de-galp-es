@@ -27,9 +27,40 @@ describe 'Usuário vê o estoque' do
     visit root_path
     click_on 'Aeroporto SP'
 
-    expect(page).to have_content 'Itens em Estoque'
-    expect(page).to have_content '3 x PRODUTO-A000-9999ABC - Produto A'
-    expect(page).to have_content '2 x PRODUTO-B000-9999ABC - Produto B'
-    expect(page).not_to have_content 'PRODUTO-C000-9999ABC'
+    within('section#stock_products') do 
+      expect(page).to have_content 'Itens em Estoque'
+      expect(page).to have_content '3 x PRODUTO-A000-9999ABC - Produto A'
+      expect(page).to have_content '2 x PRODUTO-B000-9999ABC - Produto B'
+      expect(page).not_to have_content 'PRODUTO-C000-9999ABC'
+    end
+  end
+  it 'e da baixa em um item' do
+    user = User.create!(name: 'João', email: 'joao@example.com', password: '123456')
+    warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', state: 'SP', area: 100_000, 
+                              address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
+                              description: 'Galpão destinado para cargas internacionais')
+    supplier_a = Supplier.create!(corporate_name: 'Apple Computer Brasil', brand_name: 'Apple', registration_numbers: '00.623.904/0001-00', 
+                              full_address: 'Rua Leopoldo Couto, 700', city: 'São Paulo', state: 'SP',
+                              email: 'apple@example.com') 
+    supplier_b = Supplier.create!(corporate_name: 'Samsung Computer Brasil', brand_name: 'Samsung', registration_numbers: '00.001.000/0001-00', 
+                              full_address: 'Rua Couto, 800', city: 'São Paulo', state: 'SP',
+                              email: 'samsung@example.com') 
+    product_a = ProductModel.create!(name: 'Produto A', weight: 15, width: 10, height: 20, depth: 30, 
+                              supplier: supplier_a, sku: 'PRODUTO-A000-9999ABC')
+    order =  Order.create!(user: user, warehouse: warehouse, supplier: supplier_a, 
+                              estimated_delivery_date: 1.day.from_now)    
+    2.times{StockProduct.create!(order: order, warehouse: warehouse, product_model: product_a)}
+
+    login_as(user)
+    visit root_path
+    click_on 'Aeroporto SP'
+    select 'PRODUTO-A000-9999ABC', from: 'Item para Saída'
+    fill_in 'Destinatário', with: 'Ana Silva'
+    fill_in 'Endereço Destino', with: 'Rua das Rosas, 100'
+    click_on 'Confirmar Retirada'
+
+    expect(current_path).to eq warehouse_path(warehouse.id)
+    expect(page).to have_content 'Item retirado com sucesso'
+    expect(page).to have_content '1 x PRODUTO-A000-9999ABC - Produto A'
   end
 end
