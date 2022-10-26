@@ -1,5 +1,9 @@
 # README
 
+* Ruby 3.0.0
+* Rails 7.0.3
+
+
 O projeto representa uma aplicação dentro do contexto de um e-commerce. 
 Um sistema para controle do estoque de produtos.
 
