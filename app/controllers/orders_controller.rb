@@ -33,7 +33,8 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @warehouses = Warehouse.all
+    @order = Order.find(params[:id])
+    @warehouses = Warehouse.all 
     @suppliers = Supplier.all
   end
 
